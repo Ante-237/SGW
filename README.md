@@ -13,3 +13,10 @@ Virtual and Augmented Reality Specialization Group work.
 4. The resume button should continue the stopwatch from when it was paused
 5. The reset button should set the watch back to 00:00:00
 6. The stop button should stop the watch and display the last read value
+
+### DOCUMENTATION
+---
+
+
+### UNIT TEST
+---
