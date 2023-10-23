@@ -6,10 +6,10 @@ using System.Threading;
 
 namespace WatchStuff{
 
-    public class Timer{
+    public class Watch{
 
         private static Stopwatch _stopWatch;
-        private static bool isRunning = false;
+        public static bool isRunning = false;
 /// <summary>
 /// Manages main logic of the stop watch.
 /// </summary>

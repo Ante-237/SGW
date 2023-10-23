@@ -1,4 +1,5 @@
-namespace Timer.Tests;
+using WatchStuff;
+
 
 public class Tests
 {
@@ -8,8 +9,29 @@ public class Tests
     }
 
     [Test]
-    public void TestOne()
+    public void TestStartButton()
     {
-        Assert.Pass();
+        Watch.StartButton();
+        Assert.IsTrue(Watch.isRunning);
     }
+
+    [Test]
+    public void TestPauseButton(){
+        Watch.PauseButton();
+        Assert.IsFalse(Watch.isRunning);
+    }
+
+    [Test]
+    public void TestResumeButton(){
+        Watch.ResumeButton();
+        Assert.IsTrue(Watch.isRunning);
+    }
+
+    [Test]
+    public void TestResetButton(){
+        Watch.ResetButton();
+        Assert.IsFalse(Watch.isRunning);
+    }
+
+
 }
