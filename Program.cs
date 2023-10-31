@@ -1,43 +1,54 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
+using System.Timers;
 
 class Program
 {
-    // To track if the stopwatch is running
+    static Stopwatch stopwatch = new Stopwatch();
     static bool isRunning = false;
-
-    // Variable to store the elapsed time
-    static TimeSpan elapsedTime = TimeSpan.Zero;
+    static bool stopRequested = false;
+    static System.Timers.Timer timer;
 
     static void Main(string[] args)
     {
         Console.WriteLine("Stopwatch Timer");
+        timer = new System.Timers.Timer(1000); // Create a timer to update the time every second
+        timer.Elapsed += TimerElapsed;
 
-        // infinite loop to continuosly display the timer and process user input
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("Time: " + elapsedTime.ToString("hh\\:mm\\:ss"));
-            Console.WriteLine("Commands:");
-            Console.WriteLine("S - Start");
-            Console.WriteLine("P - Pause");
-            Console.WriteLine("R - Resume");
-            Console.WriteLine("E - Reset");
-            Console.WriteLine("Q - Quit");
+            DisplayTime();
 
-            // REads character input from the user
+            if (!isRunning)
+            {
+                Console.WriteLine("Commands:");
+                Console.WriteLine("S - Start");
+                Console.WriteLine("P - Pause");
+                Console.WriteLine("R - Resume");
+                Console.WriteLine("E - Reset");
+                Console.WriteLine("Q - Quit");
+            }
+            else
+            {
+                Console.WriteLine("Press P to pause");
+            }
+
             char input = Console.ReadKey(true).KeyChar;
-
             HandleInput(input);
         }
     }
 
-    // Handles user input by processing the provided char
+    static void DisplayTime()
+    {
+        Console.WriteLine("Time: " + stopwatch.Elapsed.ToString("hh\\:mm\\:ss"));
+    }
+
     static void HandleInput(char input)
     {
         switch (char.ToUpper(input))
         {
-            // Starts stop watch if it's not already running
             case 'S':
                 if (!isRunning)
                 {
@@ -49,13 +60,14 @@ class Program
                 if (isRunning)
                 {
                     isRunning = false;
+                    PauseStopwatch();
                 }
                 break;
             case 'R':
                 if (!isRunning)
                 {
                     isRunning = true;
-                    StartStopwatch();
+                    ResumeStopwatch();
                 }
                 break;
             case 'E':
@@ -67,19 +79,48 @@ class Program
         }
     }
 
-    // increments the elapsed time by one second as long as is running is set to true
     static void StartStopwatch()
     {
-        while (isRunning)
+        stopwatch.Start();
+        timer.Start();
+    }
+
+    static void PauseStopwatch()
+    {
+        if (isRunning)
         {
-            Thread.Sleep(1000);
-            elapsedTime = elapsedTime.Add(TimeSpan.FromSeconds(1));
+            isRunning = false;
+            stopRequested = true;
+            stopwatch.Stop();
+            timer.Stop();
         }
     }
-    // Resets the stopwatch by stopping it and resetting the elapsed time to zero
+
+    static void ResumeStopwatch()
+    {
+        if (!isRunning)
+        {
+            isRunning = true;
+            stopRequested = false;
+            stopwatch.Start();
+            timer.Start();
+        }
+    }
+
     static void ResetStopwatch()
     {
         isRunning = false;
-        elapsedTime = TimeSpan.Zero;
+        stopRequested = true;
+        stopwatch.Reset();
+        timer.Stop();
+    }
+
+    static void TimerElapsed(object sender, ElapsedEventArgs e)
+    {
+        if (isRunning)
+        {
+            Console.Clear();
+            DisplayTime();
+        }
     }
 }

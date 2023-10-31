@@ -1,0 +1,14 @@
+C:\Users\felki\arvr\SGW\bin\Debug\net7.0\SGW.exe
+C:\Users\felki\arvr\SGW\bin\Debug\net7.0\SGW.deps.json
+C:\Users\felki\arvr\SGW\bin\Debug\net7.0\SGW.runtimeconfig.json
+C:\Users\felki\arvr\SGW\bin\Debug\net7.0\SGW.dll
+C:\Users\felki\arvr\SGW\bin\Debug\net7.0\SGW.pdb
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.AssemblyInfoInputs.cache
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.AssemblyInfo.cs
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.csproj.CoreCompileInputs.cache
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.dll
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\refint\SGW.dll
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.pdb
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\SGW.genruntimeconfig.cache
+C:\Users\felki\arvr\SGW\obj\Debug\net7.0\ref\SGW.dll
