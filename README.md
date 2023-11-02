@@ -15,7 +15,7 @@ Virtual and Augmented Reality Specialization Group work.
 6. The stop button should stop the watch and display the last read value
 
 ### DOCUMENTATION
-1. the stop watch uses TKinter library to create simple grphical interface for thr stopwatch
+1. the stop watch uses TKinter library to create simple grphical interface for the stopwatch
 2. The 'start' method starts the stopwatch timer. it records thre current time when the user clicks "start" and update the elasped time continuously
 3. The 'stop' methid stops the stopwatch timer
 4. The 'reset' method resets the stop watch timer to zero
