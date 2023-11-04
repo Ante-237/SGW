@@ -8,8 +8,17 @@ namespace WatchStuff{
 
     public class Watch{
 
+        /// <summary>
+        /// holds reference to the stop watch
+        /// </summary>
         private static Stopwatch _stopWatch;
+
+        /// <summary>
+        /// represents the active state of the application
+        /// </summary>
         public static bool isRunning = false;
+
+        
 /// <summary>
 /// Manages main logic of the stop watch.
 /// </summary>
@@ -50,7 +59,7 @@ namespace WatchStuff{
                 {
                     Console.Clear();
                     Entry();
-                    Console.WriteLine($"\n\t\t\tCURRENT TIME : {_stopWatch.Elapsed}");
+                    Console.WriteLine($"\n\t\t\tCURRENT TIME : {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");  
                     Thread.Sleep(200);
                 }
             }
@@ -80,7 +89,7 @@ namespace WatchStuff{
                 _stopWatch.Start();
                 isRunning = true;
                 DefaultInstruction();
-                Console.WriteLine($"\n\t\t\tSTARTED {_stopWatch.Elapsed}");
+                Console.WriteLine($"\n\t\t\tSTARTED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
             }                 
         }
 
@@ -94,7 +103,7 @@ namespace WatchStuff{
                 _stopWatch.Stop();
                 isRunning = false;
                 DefaultInstruction();
-                Console.WriteLine($"\n\t\t\tPAUSED {_stopWatch.Elapsed}");
+                Console.WriteLine($"\n\t\t\tPAUSED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
             }     
         }
 
@@ -107,7 +116,7 @@ namespace WatchStuff{
                 _stopWatch.Start();
                 isRunning = true;
                 DefaultInstruction();
-                Console.WriteLine($"\n\t\t\tRESUMED {_stopWatch.Elapsed}");
+                Console.WriteLine($"\n\t\t\tRESUMED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
             }     
         }
 
@@ -118,7 +127,7 @@ namespace WatchStuff{
             _stopWatch.Reset();
             isRunning = false;
             DefaultInstruction();
-            Console.WriteLine($"\n\t\t\tRESET {_stopWatch.Elapsed}");
+            Console.WriteLine($"\n\t\t\tRESET {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
         }
 
 /// <summary>
@@ -131,7 +140,7 @@ namespace WatchStuff{
                     PauseButton();
                     isRunning = false;
                     Entry();
-                    Console.WriteLine($"\n\t\t\tSTOPPED {_stopWatch.Elapsed}");
+                    Console.WriteLine($"\n\t\t\tSTOPPED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
                 }
         }
 
