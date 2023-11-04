@@ -1,149 +1,76 @@
 ﻿using System;
+using System.Windows.Forms;
 using System.Diagnostics;
-using System.Threading;
 
+namespace StopwatchTimerApp
+{
+	    public partial class MainForm : Form
+					        {
+							        private Stopwatch stopwatch = new Stopwatch();
+								        private TimeSpan elapsed;
 
+									        public MainForm()
+											        {
+													            InitializeComponent();
+														            }
 
-namespace WatchStuff{
+										        private void MainForm_Load(object sender, EventArgs e)
+												        {
+														            timer1.Interval = 1000; // 1 second interval
+															                timer1.Tick += new EventHandler(UpdateTimer);
+																	        }
 
-    public class Watch{
+											        private void UpdateTimer(object sender, EventArgs e)
+													        {
+															            elapsed = stopwatch.Elapsed;
+																                labelTime.Text = elapsed.ToString(@"hh\:mm\:ss");
+																		        }
 
-        /// <summary>
-        /// holds reference to the stop watch
-        /// </summary>
-        private static Stopwatch _stopWatch;
+												        private void btnStart_Click(object sender, EventArgs e)
+														        {
+																            if (!stopwatch.IsRunning)
+																		                {
+																					                timer1.Start();
+																							                stopwatch.Start();
+																									            }
+																	            }
 
-        /// <summary>
-        /// represents the active state of the application
-        /// </summary>
-        public static bool isRunning = false;
+													        private void btnPause_Click(object sender, EventArgs e)
+															        {
+																	            if (stopwatch.IsRunning)
+																			                {
+																						                timer1.Stop();
+																								                stopwatch.Stop();
+																										            }
+																		            }
 
-        
-/// <summary>
-/// Manages main logic of the stop watch.
-/// </summary>
-        public static void Main(){
+														        private void btnResume_Click(object sender, EventArgs e)
+																        {
+																		            if (!stopwatch.IsRunning)
+																				                {
+																							                timer1.Start();
+																									                stopwatch.Start();
+																											            }
+																			            }
 
-         _stopWatch  = new Stopwatch();
-         Entry();
+															        private void btnReset_Click(object sender, EventArgs e)
+																	        {
+																			            timer1.Stop();
+																				                stopwatch.Reset();
+																						            elapsed = TimeSpan.Zero;
+																							                labelTime.Text = elapsed.ToString(@"hh\:mm\:ss");
+																									        }
 
-         while (true)
-            {
-                if (Console.KeyAvailable)
-                {
-                    var key = Console.ReadKey(true).Key;
+																        private void btnStop_Click(object sender, EventArgs e)
+																		        {
+																				            if (stopwatch.IsRunning)
+																						                {
+																									                timer1.Stop();
+																											                stopwatch.Stop();
+																													            }
 
-                    switch (key)
-                    {
-                        case ConsoleKey.S:
-                            StartButton();
-                            break;
-                        case ConsoleKey.F:
-                            StopButton();
-                            break;
-                        case ConsoleKey.R:
-                            ResumeButton();
-                            break;
-                        case ConsoleKey.Z:
-                            ResetButton();
-                            break;
-                        case ConsoleKey.P:
-                            PauseButton();
-                            break;
-                        case ConsoleKey.Escape:
-                            return; 
-                    }
-                }
-
-                if (isRunning)
-                {
-                    Console.Clear();
-                    Entry();
-                    Console.WriteLine($"\n\t\t\tCURRENT TIME : {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");  
-                    Thread.Sleep(200);
-                }
-            }
-
-        }
-
-/// <summary>
-/// Default call method for showing instructions
-/// </summary>
-        public static void Entry(){ 
-            DefaultInstruction();
-          
-        }
-/// <summary>
-/// Show instructinos for buttons
-/// </summary>
-        public static void DefaultInstruction(){
-            Console.WriteLine("\n\n\t\t\tSTOPWATCH CONTROLS\n\n [S] == START  |  [P] == PAUSE  |  [R] == RESUME  |  [Z] == RESET  |  [F] == STOP |  [Esc] == EXIT");
-        }
-
-/// <summary>
-/// The start button starts the watch from the secs and adds up to minutes and hours
-/// </summary>
-        public static void StartButton(){
-            if (!isRunning)
-            {
-                _stopWatch.Start();
-                isRunning = true;
-                DefaultInstruction();
-                Console.WriteLine($"\n\t\t\tSTARTED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
-            }                 
-        }
-
-/// <summary>
-/// The pause button pauses the stopwatch and prints its current value to the console or display the current value
-/// </summary>
-        public static void PauseButton(){
-                // P to pause
-            if (isRunning)
-            {
-                _stopWatch.Stop();
-                isRunning = false;
-                DefaultInstruction();
-                Console.WriteLine($"\n\t\t\tPAUSED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
-            }     
-        }
-
-/// <summary>
-/// The resume button continues the stopwatch from when it was paused
-/// </summary>
-        public static void ResumeButton(){
-                if (!isRunning)
-            {
-                _stopWatch.Start();
-                isRunning = true;
-                DefaultInstruction();
-                Console.WriteLine($"\n\t\t\tRESUMED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
-            }     
-        }
-
-/// <summary>
-/// The reset button setS the watch back to 00:00:00
-/// </summary>
-        public static void ResetButton(){
-            _stopWatch.Reset();
-            isRunning = false;
-            DefaultInstruction();
-            Console.WriteLine($"\n\t\t\tRESET {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
-        }
-
-/// <summary>
-/// The stopbutton stops the watch and display the last read value
-/// </summary>
-        public static void StopButton(){
-            if (isRunning)
-                {
-                    _stopWatch.Stop();
-                    PauseButton();
-                    isRunning = false;
-                    Entry();
-                    Console.WriteLine($"\n\t\t\tSTOPPED {_stopWatch.Elapsed.ToString("hh\\:mm\\:ss")}");
-                }
-        }
-
-    }
-
+																					                MessageBox.Show($"Elapsed Time: {elapsed.ToString(@"hh\:mm\:ss")}", "Stopwatch Stopped", MessageBoxButtons.OK, MessageBoxIcon.Information);
+																							        }
+																	    }
 }
+
