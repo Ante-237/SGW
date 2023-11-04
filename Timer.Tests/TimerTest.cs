@@ -31,7 +31,5 @@ public class Tests
     public void TestResetButton(){
         Watch.ResetButton();
         Assert.IsFalse(Watch.isRunning);
-    }
-
-
+    {
 }
