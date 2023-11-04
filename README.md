@@ -3,7 +3,7 @@ Virtual and Augmented Reality Specialization Group work.
 
 
 ## STOP WATCH MECHANISM
-
+![Alt text](stopwatch.png)
 ----
 ### TASKS/FUNCTIONALITIES
 
