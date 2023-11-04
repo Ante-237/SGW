@@ -1,76 +1,108 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.Diagnostics;
 
-namespace StopwatchTimerApp
+class Program
 {
-	    public partial class MainForm : Form
+	    static Stopwatch stopwatch = new Stopwatch();
+	        static TimeSpan elapsed = TimeSpan.Zero;
+
+		    static void Main()
+			        {
+					        Console.WriteLine("Stopwatch Timer (HH:mm:ss Format)");
+						        Console.WriteLine("Commands: start, pause, resume, reset, stop, exit");
+
+							        while (true)
+									        {
+											            string input = Console.ReadLine().ToLower();
+												                switch (input)
+															            {
+																	                    case "start":
+																				                        StartTimer();
+																							                    break;
+																									                    case "pause":
+																									                        PauseTimer();
+																												                    break;
+																														                    case "resume":
+																														                        ResumeTimer();
+																																	                    break;
+																																			                    case "reset":
+																																			                        ResetTimer();
+																																						                    break;
+																																								                    case "stop":
+																																								                        StopTimer();
+																																											                    break;
+																																													                    case "exit":
+																																													                        Environment.Exit(0);
+																																																                    break;
+																																																		                    default:
+																																																		                        Console.WriteLine("Invalid command. Try again.");
+																																																					                    break;
+																																																							                }
+														        }
+								    }
+
+		        static void StartTimer()
+				    {
+					            if (!stopwatch.IsRunning)
+							            {
+									                stopwatch.Start();
+											            Console.WriteLine("Timer started.");
+												                while (stopwatch.IsRunning)
+															            {
+																	                    elapsed = stopwatch.Elapsed;
+																			                    Console.Write($"\rElapsed Time: {elapsed:hh\\:mm\\:ss}");
+																					                }
+														        }
+						        }
+
+			    static void PauseTimer()
+				        {
+						        if (stopwatch.IsRunning)
+								        {
+										            stopwatch.Stop();
+											                Console.WriteLine($"\rPaused at {elapsed:hh\\:mm\\:ss}");
+													        }
+							        else
+									        {
+											            Console.WriteLine("Timer is not running.");
+												            }
+								    }
+
+			        static void ResumeTimer()
+					    {
+						            if (!stopwatch.IsRunning && stopwatch.Elapsed > TimeSpan.Zero)
+								            {
+										                stopwatch.Start();
+												            Console.WriteLine("\rResumed.");
+													                while (stopwatch.IsRunning)
+																            {
+																		                    elapsed = stopwatch.Elapsed;
+																				                    Console.Write($"\rElapsed Time: {elapsed:hh\\:mm\\:ss}");
+																						                }
+															        }
+							        }
+
+				    static void ResetTimer()
 					        {
-							        private Stopwatch stopwatch = new Stopwatch();
-								        private TimeSpan elapsed;
+							        if (stopwatch.IsRunning)
+									        {
+											            stopwatch.Stop();
+												            }
+								        elapsed = TimeSpan.Zero;
+									        stopwatch.Reset();
+										        Console.WriteLine("Timer reset to 00:00:00.");
+											    }
 
-									        public MainForm()
-											        {
-													            InitializeComponent();
+				        static void StopTimer()
+						    {
+							            if (stopwatch.IsRunning)
+									            {
+											                stopwatch.Stop();
+													            Console.WriteLine($"\rElapsed Time: {elapsed:hh\\:mm\\:ss}");
 														            }
-
-										        private void MainForm_Load(object sender, EventArgs e)
-												        {
-														            timer1.Interval = 1000; // 1 second interval
-															                timer1.Tick += new EventHandler(UpdateTimer);
-																	        }
-
-											        private void UpdateTimer(object sender, EventArgs e)
-													        {
-															            elapsed = stopwatch.Elapsed;
-																                labelTime.Text = elapsed.ToString(@"hh\:mm\:ss");
-																		        }
-
-												        private void btnStart_Click(object sender, EventArgs e)
-														        {
-																            if (!stopwatch.IsRunning)
-																		                {
-																					                timer1.Start();
-																							                stopwatch.Start();
-																									            }
-																	            }
-
-													        private void btnPause_Click(object sender, EventArgs e)
-															        {
-																	            if (stopwatch.IsRunning)
-																			                {
-																						                timer1.Stop();
-																								                stopwatch.Stop();
-																										            }
-																		            }
-
-														        private void btnResume_Click(object sender, EventArgs e)
-																        {
-																		            if (!stopwatch.IsRunning)
-																				                {
-																							                timer1.Start();
-																									                stopwatch.Start();
-																											            }
-																			            }
-
-															        private void btnReset_Click(object sender, EventArgs e)
-																	        {
-																			            timer1.Stop();
-																				                stopwatch.Reset();
-																						            elapsed = TimeSpan.Zero;
-																							                labelTime.Text = elapsed.ToString(@"hh\:mm\:ss");
-																									        }
-
-																        private void btnStop_Click(object sender, EventArgs e)
-																		        {
-																				            if (stopwatch.IsRunning)
-																						                {
-																									                timer1.Stop();
-																											                stopwatch.Stop();
-																													            }
-
-																					                MessageBox.Show($"Elapsed Time: {elapsed.ToString(@"hh\:mm\:ss")}", "Stopwatch Stopped", MessageBoxButtons.OK, MessageBoxIcon.Information);
-																							        }
-																	    }
+								            else
+										            {
+												                Console.WriteLine("Timer is not running.");
+														        }
+									        }
 }
-
