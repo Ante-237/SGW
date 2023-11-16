@@ -22,6 +22,9 @@ namespace MauiApp1
             SetupUpdateTimer();
         }
         
+        /// <summary>
+        /// looking page content
+        /// </summary>
         private void SetupUpdateTimer()
         {
             Device.StartTimer(TimeSpan.FromMilliseconds(100), () =>
@@ -33,14 +36,11 @@ namespace MauiApp1
                     SemanticScreenReader.Announce(TimerLabel.Text);
                 }
 
-           
-
-
                 return true;
             });
         }
         
-
+        // listener to start timer 
 
         private void OnStartClicked(object sender, EventArgs e)
         {
@@ -52,6 +52,11 @@ namespace MauiApp1
             StateLabel.Text = "Timer Started";
         }
 
+        /// <summary>
+        /// listener for pausing timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnPauseClicked(object sender, EventArgs e)
         {
             count++;
@@ -63,6 +68,11 @@ namespace MauiApp1
             SemanticScreenReader.Announce(TimerLabel.Text);
         }
 
+        /// <summary>
+        /// listener for reseting timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnResetClicked(object sender, EventArgs e)
         {
             count = 0;
@@ -73,6 +83,11 @@ namespace MauiApp1
             SemanticScreenReader.Announce(TimerLabel.Text);
         }
 
+        /// <summary>
+        /// listerner for stopping timer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void OnStopClicked(object sender, EventArgs e)
         {
              count++;
