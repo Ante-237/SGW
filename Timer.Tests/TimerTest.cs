@@ -3,9 +3,13 @@ using WatchStuff;
 
 public class Tests
 {
+    public Watch _watch;
+
     [SetUp]
     public void Setup()
     {
+        _watch = new Watch();
+        Watch.Main();
     }
 
     [Test]
